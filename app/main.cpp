@@ -6,22 +6,23 @@
 #include <boost/graph/adjacency_list.hpp>
 #include <string>
 
-typedef boost::property<boost::edge_weight_t,int> EdgeWeightProperty;
-typedef boost::adjacency_list<boost::listS,boost::vecS,boost::directedS,boost::no_property, EdgeWeightProperty> DirectedGraph;
-typedef boost::graph_traits<DirectedGraph>::edge_iterator edge_iterator;
+typedef boost::adjacency_list<boost::listS,boost::vecS,boost::undirectedS,boost::no_property> Graph;
+typedef boost::graph_traits<Graph>::edge_iterator edge_iterator;
 
 std::deque<int> read_input(std::string file_path);
 bool havel_hakimi(std::deque<int> sequence);
-
+bool pairing_model(const std::deque<int>&, Graph&);
 
 int main()
 {
-
+  Graph g;
   std::deque<int> degree_sequence = read_input("../feeds/in/test.txt");
-
-  std::string message = havel_hakimi(degree_sequence) ? "yes":"no";
-  std::cout<< message <<std::endl;
-
+  if(pairing_model(degree_sequence,g))
+  {
+	std::pair<edge_iterator,edge_iterator> edges = boost::edges(g);
+	std::copy(edges.first,edges.second,std::ostream_iterator<Graph::edge_descriptor>{std::cout,"\n"});
+  }
+  std::cout<<std::endl;
   /*
   DirectedGraph g;
 
@@ -39,12 +40,11 @@ int main()
   std::cout<<"Number of edges:"<<boost::num_edges(g)<<std::endl;
   std::cout<<"Edge list:\n";
 
-  std::copy(
-	  ei.first,
-	  ei.second,
-	  std::ostream_iterator<boost::adjacency_list<>::edge_descriptor>{std::cout,"\n"});
+  for(auto it = ei.first; it != ei.second;it++)
+  {
+	std::cout<<(*it).m_source<<(*it).m_target<<std::endl;
 
-  std::cout<<std::endl;
+  }
   return 0;
-*/
+  */
 }
