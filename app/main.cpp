@@ -1,50 +1,42 @@
 //
 // Created by Deniz Surmeli on 29.04.2022.
 //
-#include <iostream>
-#include <deque>
 #include <boost/graph/adjacency_list.hpp>
+#include <deque>
+#include <iostream>
+#include <numeric>
 #include <string>
 
-typedef boost::adjacency_list<boost::listS,boost::vecS,boost::undirectedS,boost::no_property> Graph;
+typedef boost::adjacency_list<boost::listS, boost::vecS, boost::undirectedS, boost::no_property> Graph;
 typedef boost::graph_traits<Graph>::edge_iterator edge_iterator;
 
 std::deque<int> read_input(std::string file_path);
-bool havel_hakimi(std::deque<int> sequence);
-bool pairing_model(const std::deque<int>&, Graph&);
+bool write_output(std::string, std::deque<int>, Graph);
+bool check_graphicality(std::deque<int> sequence);
+bool pairing_model(const std::deque<int> &, Graph &);
+std::deque<std::string> split_string(std::string, std::string);
 
-int main()
-{
-  Graph g;
-  std::deque<int> degree_sequence = read_input("../feeds/in/test.txt");
-  if(pairing_model(degree_sequence,g))
-  {
-	std::pair<edge_iterator,edge_iterator> edges = boost::edges(g);
-	std::copy(edges.first,edges.second,std::ostream_iterator<Graph::edge_descriptor>{std::cout,"\n"});
-  }
-  std::cout<<std::endl;
-  /*
-  DirectedGraph g;
-
-  boost::add_edge(0,1,8,g);
-  boost::add_edge (0, 3, 18, g);
-  boost::add_edge (1, 2, 20, g);
-  boost::add_edge (2, 3, 2, g);
-  boost::add_edge (3, 1, 1, g);
-  boost::add_edge (1, 3, 7, g);
-  boost::add_edge (1, 4, 1, g);
-  boost::add_edge (4, 5, 6, g);
-  boost::add_edge (2, 5, 7, g);
-
-  std::pair<edge_iterator,edge_iterator> ei = boost::edges(g);
-  std::cout<<"Number of edges:"<<boost::num_edges(g)<<std::endl;
-  std::cout<<"Edge list:\n";
-
-  for(auto it = ei.first; it != ei.second;it++)
-  {
-	std::cout<<(*it).m_source<<(*it).m_target<<std::endl;
-
-  }
-  return 0;
-  */
+int main(int ac, char **argv) {
+	if (ac > 1) {
+		Graph g;
+		std::string file_path = std::string(argv[1]);
+		std::string file_name{};
+		size_t pos = file_path.find_last_of("/");
+		if (pos != std::string::npos) {
+			file_name = file_path.substr(pos);
+		}
+		std::deque<int> degree_sequence = read_input(file_path);
+		std::deque<std::string> file_props = split_string(file_name, "-");
+		if (pairing_model(degree_sequence, g)) {
+			//std::pair<edge_iterator, edge_iterator> edges = boost::edges(g);
+			//td::copy(edges.first, edges.second, std::ostream_iterator<Graph::edge_descriptor>{std::cout, "\n"});
+		}
+		std::string prop_construct = std::accumulate(file_props.begin(), file_props.end() - 1, std::string(),
+													 [](std::string &ss, std::string &s) {
+														 return ss.empty() ? s : ss + "-" + s;
+													 });
+		prop_construct.erase(0, 1);
+		std::string out_file_path = "../feeds/out/O-" + prop_construct + "-HH.txt";
+		write_output(out_file_path, degree_sequence, g);
+	}
 }
