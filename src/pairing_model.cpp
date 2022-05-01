@@ -12,6 +12,7 @@ typedef boost::graph_traits<Graph>::edge_iterator edge_iterator;
 
 bool check_graph(std::deque<int>, Graph g);
 bool check_graphicality(std::deque<int> sequence);
+bool check_cycles(Graph g);
 
 std::vector<int> to_stub_list(std::deque<int> degree_sequence) {
 	std::vector<int> stub_list;
@@ -49,6 +50,10 @@ bool pairing_model(const std::deque<int> &degree_sequence, Graph &g) {
 
 	for (auto edge: edges) {
 		boost::add_edge(edge.first, edge.second, g);
+		//if there is cycle after the edge, restart the process.
+		if (check_cycles(g)) {
+			pairing_model(degree_sequence, g);
+		}
 	}
 	//check the generated graph has the desired properties
 	//removing this statement helps the algorithm tremendously.

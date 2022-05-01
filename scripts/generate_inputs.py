@@ -25,28 +25,12 @@ def write_to_textfile(length, sequence, identifier, valid=True):
 def generate_valid_input(identifier, min_size=1, max_size=50):
     size = random.randint(min_size, max_size)
     degrees = [random.randint(0, size - 1) for i in range(size)]
+    degrees.sort(reverse=True)
     write_to_textfile(size, degrees, identifier)
 
 
 def generate_invalid_input(identifier, min_size=1, max_size=50):
     size = random.randint(min_size, max_size)
     degrees = [random.randint(max_size, max_size * 2) for i in range(size)]
+    degrees.sort(reverse=True)
     write_to_textfile(size, degrees, identifier, False)
-
-
-if __name__ == "__main__":
-    if len(sys.argv) <= 1:
-        print("Enter parameters for generating inputs.")
-    else:
-        valid_count = int(sys.argv[1])
-        invalid_count = int(sys.argv[2])
-        print("Generating:")
-        print("\t-", valid_count, " valid inputs")
-        print("\t-", invalid_count, " invalid inputs")
-
-        for i in range(valid_count):
-            generate_valid_input(i)
-        for i in range(invalid_count):
-            generate_invalid_input(i)
-
-        print("Done.")

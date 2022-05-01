@@ -14,6 +14,7 @@ std::deque<int> read_input(std::string file_path);
 bool write_output(std::string, std::deque<int>, Graph);
 bool check_graphicality(std::deque<int> sequence);
 bool pairing_model(const std::deque<int> &, Graph &);
+bool havel_hakimi_generator(const std::deque<int> &, Graph &);
 std::deque<std::string> split_string(std::string, std::string);
 
 int main(int ac, char **argv) {
@@ -27,10 +28,12 @@ int main(int ac, char **argv) {
 		}
 		std::deque<int> degree_sequence = read_input(file_path);
 		std::deque<std::string> file_props = split_string(file_name, "-");
-		if (pairing_model(degree_sequence, g)) {
-			//std::pair<edge_iterator, edge_iterator> edges = boost::edges(g);
-			//td::copy(edges.first, edges.second, std::ostream_iterator<Graph::edge_descriptor>{std::cout, "\n"});
+		if (havel_hakimi_generator(degree_sequence, g)) {
+			std::cout << "Generation successfull." << std::endl;
+			std::pair<edge_iterator, edge_iterator> edges = boost::edges(g);
+			std::copy(edges.first, edges.second, std::ostream_iterator<Graph::edge_descriptor>{std::cout, "\n"});
 		}
+		std::cout << std::endl;
 		std::string prop_construct = std::accumulate(file_props.begin(), file_props.end() - 1, std::string(),
 													 [](std::string &ss, std::string &s) {
 														 return ss.empty() ? s : ss + "-" + s;

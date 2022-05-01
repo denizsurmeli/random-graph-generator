@@ -3,7 +3,6 @@
 //
 #include <boost/graph/adjacency_list.hpp>
 #include <boost/graph/depth_first_search.hpp>
-#include <iterator>
 #include <utility>
 typedef boost::adjacency_list<boost::listS, boost::vecS, boost::undirectedS, boost::no_property> Graph;
 
@@ -71,7 +70,7 @@ bool check_multiple_edges(Graph g) {
 }
 
 bool check_graph(std::deque<int> degree_sequence, Graph g) {
-	bool degree_check = check_sequence(std::move(degree_sequence), g);
+	bool degree_check = check_sequence(degree_sequence, g);
 	bool cycle_check = check_cycles(g);
 	bool multiple_edge_check = check_multiple_edges(g);
 
