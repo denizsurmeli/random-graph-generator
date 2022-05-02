@@ -10,13 +10,13 @@ A collection of graph generators.
 - [ ] Recursive version of the Havel-Hakimi Generator
 - [ ] Better CLI Scripts
 - [ ] Easy builder and runner scripts
-- [ ] Pairing Model Generator
-- [ ] Havel-Hakimi Generator
+- [x] Pairing Model Generator
+- [x] Havel-Hakimi Generator
 - [ ] Graphviz Generator(Built-in Boost Libraries)
-- [ ] Input Generator
-- [ ] Input Reader
-- [ ] Output Writer
-- [ ] CMake Config
+- [x] Input Generator
+- [x] Input Reader
+- [x] Output Writer
+- [x] CMake Config
 
 ## Usage
 
