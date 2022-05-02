@@ -27,7 +27,7 @@ std::vector<int> to_stub_list(std::deque<int> degree_sequence) {
 // This algorithm is highly problematic, very inefficient for large n.
 // @TODO:Ask TA about a better algorithm to implement, or just leave it as is for
 // the sake of research.
-bool pairing_model(const std::deque<int> &degree_sequence, Graph &g) {
+bool pairing_model_generator(const std::deque<int> &degree_sequence, Graph &g) {
 	if (!check_graphicality(degree_sequence))
 		return false;
 
@@ -51,14 +51,14 @@ bool pairing_model(const std::deque<int> &degree_sequence, Graph &g) {
 	for (auto edge: edges) {
 		boost::add_edge(edge.first, edge.second, g);
 		//if there is cycle after the edge, restart the process.
-		if (check_cycles(g)) {
-			pairing_model(degree_sequence, g);
-		}
+		//if (check_cycles(g)) {
+		//	pairing_model_generator(degree_sequence, g);
+		//}
 	}
 	//check the generated graph has the desired properties
 	//removing this statement helps the algorithm tremendously.
 	//for the sake of testing, it's disabled during development.
 	//if(!check_graph(degree_sequence,g))
-	//	pairing_model(degree_sequence,g);
+	//	pairing_model_generator(degree_sequence,g);
 	return true;
 }

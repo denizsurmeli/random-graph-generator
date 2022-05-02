@@ -11,6 +11,8 @@
 typedef boost::adjacency_list<boost::listS, boost::vecS, boost::undirectedS, boost::no_property> Graph;
 typedef boost::graph_traits<Graph>::edge_iterator edge_iterator;
 
+bool check_graphicality(std::deque<int>);
+
 std::deque<std::string> split_string(std::string str, std::string delimiter) {
 	std::string word{};
 	std::deque<std::string> pieces{};
@@ -65,7 +67,34 @@ std::deque<int> read_input(std::string filepath) {
 	return degrees;
 }
 
+std::string postfix_indexer(int i) {
+	if (i < 0 || i > 2) {
+		return "ERROR_OUTPUT.txt";
+	}
+	if (i == 0) {
+		return "-HH.txt";
+	}
+	if (i == 1) {
+		return "-PM.txt";
+	}
+	return "-SA.txt";
+}
+
 bool write_output(std::string file_path, std::deque<int> degree_sequence, Graph g) {
+	if (!check_graphicality(degree_sequence)) {
+		std::ofstream out_file;
+		out_file.open(file_path);
+		out_file << "0\n";
+		out_file.close();
+		return true;
+	}
+	if(boost::num_vertices(g) == 0){
+		std::ofstream out_file;
+		out_file.open(file_path);
+		out_file << "1\n0\n";
+		out_file.close();
+		return true;
+	}
 	int vertex_count = boost::num_vertices(g);
 	std::map<int, std::vector<int>> vertex_info;
 	std::pair<Graph::edge_iterator, Graph::edge_iterator> edge_iters = boost::edges(g);
@@ -81,7 +110,7 @@ bool write_output(std::string file_path, std::deque<int> degree_sequence, Graph 
 		out_file << degree << " ";
 	}
 	out_file << "\n";
-	for (auto p: vertex_info) {
+	for (const auto &p: vertex_info) {
 		out_file << p.first + 1 << " ";
 		for (auto av: p.second) {
 			out_file << av + 1 << " ";
@@ -91,3 +120,6 @@ bool write_output(std::string file_path, std::deque<int> degree_sequence, Graph 
 	out_file.close();
 	return true;
 }
+
+//@TODO:Implement benchmark to csv exporter.
+bool benchmark_to_csv(std::vector<std::vector<std::pair<int, double>>> results);
