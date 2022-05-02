@@ -15,7 +15,7 @@ std::pair<int, double> benchmark(std::deque<int> degree_sequence, Graph &g, std:
 	std::pair<int, double> result{};
 	t_start = std::chrono::high_resolution_clock::now();
 	if (!generator(degree_sequence, g))
-		;
+		return std::pair<int, double>{0, 0};
 	t_end = std::chrono::high_resolution_clock::now();
 
 	auto start = std::chrono::time_point_cast<std::chrono::microseconds>(t_start).time_since_epoch().count();
