@@ -3,6 +3,7 @@
 //
 
 #include <boost/graph/adjacency_list.hpp>
+#include <boost/graph/graphviz.hpp>
 #include <fstream>
 #include <iostream>
 #include <string>
@@ -72,14 +73,17 @@ std::string postfix_indexer(int i) {
 		return "ERROR_OUTPUT.txt";
 	}
 	if (i == 0) {
-		return "-HH.txt";
+		return "-HH";
 	}
 	if (i == 1) {
-		return "-PM.txt";
+		return "-PM";
 	}
-	return "-SA.txt";
+	return "-SA";
 }
-
+void generate_graphviz_output(std::string file_path, Graph g) {
+	std::ofstream file(file_path);
+	boost::write_graphviz(file, g);
+}
 bool write_output(std::string file_path, std::deque<int> degree_sequence, Graph g) {
 	if (!check_graphicality(degree_sequence)) {
 		std::ofstream out_file;
@@ -88,7 +92,7 @@ bool write_output(std::string file_path, std::deque<int> degree_sequence, Graph 
 		out_file.close();
 		return true;
 	}
-	if(boost::num_vertices(g) == 0){
+	if (boost::num_vertices(g) == 0) {
 		std::ofstream out_file;
 		out_file.open(file_path);
 		out_file << "1\n0\n";
@@ -100,6 +104,7 @@ bool write_output(std::string file_path, std::deque<int> degree_sequence, Graph 
 	std::pair<Graph::edge_iterator, Graph::edge_iterator> edge_iters = boost::edges(g);
 	for (auto it = edge_iters.first; it != edge_iters.second; it++) {
 		vertex_info[it->m_target].push_back(it->m_source);
+		vertex_info[it->m_source].push_back(it->m_target);
 	}
 
 	std::ofstream out_file;
@@ -122,4 +127,18 @@ bool write_output(std::string file_path, std::deque<int> degree_sequence, Graph 
 }
 
 //@TODO:Implement benchmark to csv exporter.
-bool benchmark_to_csv(std::vector<std::vector<std::pair<int, double>>> results);
+bool benchmark_to_csv(std::string out_path, std::vector<std::vector<std::pair<int, double>>> results) {
+	std::ofstream out_file;
+	out_file.open(out_path);
+	out_file << "input_size,HH,PM,SA\n";
+	for (auto triple: results) {
+		out_file << triple.at(0).first << ",";
+		for (int i = 0; i < triple.size(); i++) {
+			out_file << triple.at(i).second;
+			if (i != 2) {
+				out_file << ",";
+			}
+		}
+		out_file << "\n";
+	}
+}

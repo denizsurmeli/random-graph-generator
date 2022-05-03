@@ -4,6 +4,7 @@
 #include <algorithm>
 #include <boost/graph/adjacency_list.hpp>
 #include <deque>
+#include <iostream>
 #include <random>
 #include <utility>
 #include <vector>
@@ -28,7 +29,11 @@ std::vector<int> to_stub_list(std::deque<int> degree_sequence) {
 // @TODO:Ask TA about a better algorithm to implement, or just leave it as is for
 // the sake of research.
 bool pairing_model_generator(const std::deque<int> &degree_sequence, Graph &g) {
+
 	static int STACK_DEPTH = 0;
+	if (STACK_DEPTH == 0) {
+		std::cout << "\t[FUNC]pairing_model_generator\n";
+	}
 	g.clear();
 	if (!check_graphicality(degree_sequence))
 		return false;
@@ -55,8 +60,10 @@ bool pairing_model_generator(const std::deque<int> &degree_sequence, Graph &g) {
 		//if there is cycle after the edge, restart the process.
 		/// @NOTICE: If stack depth control is not configured, stack overflow is likely to occur for large n's.
 		/// 		 Thus, it's almost impossible to generate without the circuit breaker with pairing model generator.
-		if (check_cycles(g) && ++STACK_DEPTH < 128) {
+		if (check_cycles(g) && ++STACK_DEPTH < 16) {
 			pairing_model_generator(degree_sequence, g);
+		} else if (STACK_DEPTH == 16) {
+			std::cout << "\t[FUNC]pairing_model_generator: Generation failed. Stack Depth Exceeded.\n";
 		}
 	}
 	//check the generated graph has the desired properties

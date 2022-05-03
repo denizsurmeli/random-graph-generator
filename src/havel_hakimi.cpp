@@ -4,6 +4,7 @@
 
 #include <algorithm>
 #include <boost/graph/adjacency_list.hpp>
+#include <iostream>
 #include <utility>
 
 typedef boost::adjacency_list<boost::listS, boost::vecS, boost::undirectedS, boost::no_property> Graph;
@@ -11,6 +12,7 @@ typedef boost::adjacency_list<boost::listS, boost::vecS, boost::undirectedS, boo
 bool check_graphicality(std::deque<int> degree_sequence);
 
 bool havel_hakimi_generator(const std::deque<int> &degree_sequence, Graph &g) {
+	std::cout << "\t[FUNC]havel_hakimi_generator\n";
 	if (!check_graphicality(degree_sequence)) {
 		return false;
 	}

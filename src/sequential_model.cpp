@@ -4,10 +4,10 @@
 #include <algorithm>
 #include <boost/graph/adjacency_list.hpp>
 #include <deque>
+#include <iostream>
 #include <numeric>
 #include <random>
 #include <utility>
-
 typedef boost::adjacency_list<boost::listS, boost::vecS, boost::undirectedS, boost::no_property> Graph;
 
 bool check_graphicality(std::deque<int> sequence);
@@ -69,6 +69,7 @@ std::deque<int> erase_indices(std::deque<int> &list, std::vector<int> indices) {
 
 // @TODO:Implement sequential model
 bool sequential_model_generator(const std::deque<int> &ds, Graph &g) {
+	std::cout << "\t[FUNC]sequential_model_generator\n";
 	std::deque<int> degree_sequence = ds;
 	std::sort(degree_sequence.begin(), degree_sequence.end(), std::greater<int>());
 	if (!check_graphicality(degree_sequence)) {
