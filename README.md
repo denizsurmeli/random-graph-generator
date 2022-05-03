@@ -5,7 +5,7 @@ A collection of graph generators.
 ## TODO
 
 - [ ] Documentation
-- [ ] Sequential Algorithm Implementation
+- [x] Sequential Algorithm Implementation
 - [ ] Benchmark CSV Exporter
 - [ ] Recursive version of the Havel-Hakimi Generator
 - [ ] Better CLI Scripts
@@ -15,7 +15,7 @@ A collection of graph generators.
 - [ ] Graphviz Generator(Built-in Boost Libraries)
 - [x] Input Generator
 - [x] Input Reader
-- [x] Output Writer
+- [x] Output Writer(Partial Implemented, need better version)
 - [x] CMake Config
 
 ## Usage

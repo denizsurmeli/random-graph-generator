@@ -22,6 +22,13 @@ std::deque<std::string> split_string(std::string, std::string);
 std::pair<int, double> benchmark(std::deque<int>, Graph &, std::function<bool(std::deque<int>, Graph &)>);
 std::string postfix_indexer(int);
 
+void put_triple(std::vector<std::pair<int, double>> t) {
+	for (auto p: t) {
+		std::cout << "(" << p.first << "\t," << p.second << ")\t";
+	}
+	std::cout << std::endl;
+}
+
 void batch_generate(std::vector<std::string> file_paths) {
 	std::vector<std::vector<std::pair<int, double>>> benchmark_results;
 	std::vector<Generator> generators = {havel_hakimi_generator, pairing_model_generator, sequential_model_generator};//sequential_model_generator append
@@ -58,6 +65,10 @@ void batch_generate(std::vector<std::string> file_paths) {
 			//std::copy(edges.first, edges.second, std::ostream_iterator<Graph::edge_descriptor>{std::cout, "\n"});
 		}
 		*/
+	}
+	std::cout << "HH\t\t-PM\t\t-SA\t\t" << std::endl;
+	for (auto triple: benchmark_results) {
+		put_triple(triple);
 	}
 }
 
