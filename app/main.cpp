@@ -24,7 +24,7 @@ std::string postfix_indexer(int);
 
 void batch_generate(std::vector<std::string> file_paths) {
 	std::vector<std::vector<std::pair<int, double>>> benchmark_results;
-	std::vector<Generator> generators = {havel_hakimi_generator, pairing_model_generator};//sequential_model_generator append
+	std::vector<Generator> generators = {havel_hakimi_generator, pairing_model_generator, sequential_model_generator};//sequential_model_generator append
 	std::vector<std::string> postfixes = {"-HH.txt", "-PM.txt", "-SM.txt"};
 	std::string out_path_prefix = "../feeds/out/O-";
 
@@ -70,5 +70,14 @@ int main(int ac, char **argv) {
 			file_paths.push_back(file.path());
 		}
 		batch_generate(file_paths);
+		//		std::string file_path = "../feeds/in/9-3-3-Python-VALID.txt";
+		//		std::deque<int> degree_sequence = read_input(file_path);
+		//		if (sequential_model_generator(degree_sequence, g)) {
+		//			std::cout << "[PASS]" << std::endl;
+		//			std::pair<edge_iterator, edge_iterator> edges = boost::edges(g);
+		//			std::copy(edges.first, edges.second, std::ostream_iterator<Graph::edge_descriptor>{std::cout, "\n"});
+		//		};
+		//		std::cout << std::endl;
+		//		write_output("../feeds/out/test.txt", degree_sequence, g);
 	}
 }
