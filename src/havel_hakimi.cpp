@@ -11,6 +11,11 @@ typedef boost::adjacency_list<boost::listS, boost::vecS, boost::undirectedS, boo
 
 bool check_graphicality(std::deque<int> degree_sequence);
 
+/// @TODO:Need help for understanding this algorithm. It's a port of the NetworkX and NetworkIt, simplified
+/// even though it's very simplified. Need more research
+///		Related links:
+///			-https://github.com/networkit/networkit/blob/master/networkit/cpp/generators/HavelHakimiGenerator.cpp
+///			-https://networkx.org/documentation/stable/reference/generated/networkx.generators.degree_seq.havel_hakimi_graph.html#networkx.generators.degree_seq.havel_hakimi_graph
 bool havel_hakimi_generator(const std::deque<int> &degree_sequence, Graph &g) {
 	std::cout << "\t[FUNC]havel_hakimi_generator\n";
 	if (!check_graphicality(degree_sequence)) {

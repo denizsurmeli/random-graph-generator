@@ -14,6 +14,8 @@ typedef boost::graph_traits<Graph>::edge_iterator edge_iterator;
 
 bool check_graphicality(std::deque<int>);
 
+/// Splits a given string from the delimiter into a deque.
+/// Example: "TEST THIS", delimiter=" " ===> OUTPUT <"TEST","THIS">
 std::deque<std::string> split_string(std::string str, std::string delimiter) {
 	std::string word{};
 	std::deque<std::string> pieces{};
@@ -26,7 +28,7 @@ std::deque<std::string> split_string(std::string str, std::string delimiter) {
 	pieces.push_back(str);
 	return pieces;
 }
-
+/// <THIS IS AN INPLACE MUTATOR FOR GIVEN A LOCATION,PERFORMS THE SAME OPERATION AS THE ABOVE>
 //Splits the string by the given delimiter, puts the pieces into a vector.
 //Example:
 //str:"1 2 3 4 5 6"
@@ -68,6 +70,7 @@ std::deque<int> read_input(std::string filepath) {
 	return degrees;
 }
 
+/// Auxiliary function for helping file naming.
 std::string postfix_indexer(int i) {
 	if (i < 0 || i > 2) {
 		return "ERROR_OUTPUT.txt";
@@ -80,11 +83,17 @@ std::string postfix_indexer(int i) {
 	}
 	return "-SA";
 }
+
+/// Generates graphviz output given a file_path and a graph.
 void generate_graphviz_output(std::string file_path, Graph g) {
 	std::ofstream file(file_path);
 	boost::write_graphviz(file, g);
 }
+
+/// Writes output to the given file_path.
 bool write_output(std::string file_path, std::deque<int> degree_sequence, Graph g) {
+
+	/// EDGE_CASES- START
 	if (!check_graphicality(degree_sequence)) {
 		std::ofstream out_file;
 		out_file.open(file_path);
@@ -99,6 +108,8 @@ bool write_output(std::string file_path, std::deque<int> degree_sequence, Graph 
 		out_file.close();
 		return true;
 	}
+	/// EDGE_CASES-END
+
 	int vertex_count = boost::num_vertices(g);
 	std::map<int, std::vector<int>> vertex_info;
 	std::pair<Graph::edge_iterator, Graph::edge_iterator> edge_iters = boost::edges(g);
@@ -126,7 +137,7 @@ bool write_output(std::string file_path, std::deque<int> degree_sequence, Graph 
 	return true;
 }
 
-//@TODO:Implement benchmark to csv exporter.
+/// Exports benchmarks to a csv file.
 bool benchmark_to_csv(std::string out_path, std::vector<std::vector<std::pair<int, double>>> results) {
 	std::ofstream out_file;
 	out_file.open(out_path);
