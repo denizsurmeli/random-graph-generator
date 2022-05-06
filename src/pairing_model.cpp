@@ -15,6 +15,8 @@ bool check_graph(std::deque<int>, Graph g);
 bool check_graphicality(std::deque<int> sequence);
 bool check_cycles(Graph g);
 
+/// Generates a stublist given a degree sequence. Stublist are lists that given a sequence of values,
+/// the indicies of the elements are inserted to the stublist times their value.
 std::vector<int> to_stub_list(std::deque<int> degree_sequence) {
 	std::vector<int> stub_list;
 
@@ -25,21 +27,23 @@ std::vector<int> to_stub_list(std::deque<int> degree_sequence) {
 	}
 	return stub_list;
 }
-// This algorithm is highly problematic, very inefficient for large n.
-// @TODO:Ask TA about a better algorithm to implement, or just leave it as is for
-// the sake of research.
+/// Generates graphs using the pairing model.
 bool pairing_model_generator(const std::deque<int> &degree_sequence, Graph &g) {
-
+	// Stack depth constraint
 	static int STACK_DEPTH = 0;
 	if (STACK_DEPTH == 0) {
 		std::cout << "\t[FUNC]pairing_model_generator\n";
 	}
+	// We clear the graph because if we don't, a recursive call could have been adding some edges
+	// that are not meant to be here.
 	g.clear();
 	if (!check_graphicality(degree_sequence))
 		return false;
 
+	// generate the stublist
 	std::vector<int> stub_list = to_stub_list(degree_sequence);
 
+	//shuffle the stublist for matchings
 	std::shuffle(stub_list.begin(), stub_list.end(), std::mt19937(std::random_device()()));
 
 	int len = stub_list.size();
@@ -47,14 +51,17 @@ bool pairing_model_generator(const std::deque<int> &degree_sequence, Graph &g) {
 	//will assure that we have exactly k stubs.
 	int half = len / 2;
 
+	//divide the stublist into two lists, match them uniformly !
 	std::vector<int> left = std::vector<int>(stub_list.begin(), stub_list.begin() + half);
 	std::vector<int> right = std::vector<int>(stub_list.begin() + half, stub_list.end());
 
+	//add psuedo-edges to the list.
 	std::vector<std::pair<int, int>> edges;
 	for (int i = 0; i < left.size(); i++) {
 		edges.push_back(std::pair<int, int>(left.at(i), right.at(i)));
 	}
 
+	//add psuedo-edges to to graph.
 	for (auto edge: edges) {
 		boost::add_edge(edge.first, edge.second, g);
 		//if there is cycle after the edge, restart the process.
@@ -66,10 +73,6 @@ bool pairing_model_generator(const std::deque<int> &degree_sequence, Graph &g) {
 			std::cout << "\t[FUNC]pairing_model_generator: Generation failed. Stack Depth Exceeded.\n";
 		}
 	}
-	//check the generated graph has the desired properties
-	//removing this statement helps the algorithm tremendously.
-	//for the sake of testing, it's disabled during development.
-	//if(!check_graph(degree_sequence,g))
-	//	pairing_model_generator(degree_sequence,g);
+
 	return true;
 }

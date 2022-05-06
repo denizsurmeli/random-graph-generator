@@ -1,5 +1,7 @@
 from generate_inputs import *
 
+# Helper script for construction of whole program.
+
 if __name__ == "__main__":
     if len(sys.argv) <= 1:
         print("Enter parameters for generating inputs.")

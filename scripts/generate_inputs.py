@@ -7,6 +7,7 @@ GROUP_ID = "9"
 GENERATION_METHOD = "Python"
 
 
+# Check a degree sequence is graphical or not
 def havel_hakimi(seq):
     if len(seq) < 1 or all(deg == 0 for deg in seq):
         return True
@@ -26,6 +27,7 @@ def havel_hakimi(seq):
     return havel_hakimi(seq)
 
 
+# output to text files of the generated sequences
 def write_to_textfile(length, sequence, identifier, valid=True):
     identifier_str = str(identifier)
     file_name = "-".join([
@@ -41,6 +43,7 @@ def write_to_textfile(length, sequence, identifier, valid=True):
         f.write("".join([str(i) + " " for i in sequence]).rstrip())
 
 
+### Following functions are self-explanatory we believe
 def generate_valid_input(identifier, min_size=1, max_size=50):
     size = random.randint(min_size, max_size)
     degrees = [random.randint(0, size - 1) for i in range(size)]
