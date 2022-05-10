@@ -31,6 +31,7 @@ std::vector<int> to_stub_list(std::deque<int> degree_sequence) {
 bool pairing_model_generator(const std::deque<int> &degree_sequence, Graph &g) {
 	// Stack depth constraint
 	static int STACK_DEPTH = 0;
+	constexpr int STACK_MAX_DEPTH = 16;
 	if (STACK_DEPTH == 0) {
 		std::cout << "\t[FUNC]pairing_model_generator\n";
 	}
@@ -67,9 +68,9 @@ bool pairing_model_generator(const std::deque<int> &degree_sequence, Graph &g) {
 		//if there is cycle after the edge, restart the process.
 		/// @NOTICE: If stack depth control is not configured, stack overflow is likely to occur for large n's.
 		/// 		 Thus, it's almost impossible to generate without the circuit breaker with pairing model generator.
-		if (check_cycles(g) && ++STACK_DEPTH < 16) {
+		if (check_cycles(g) && ++STACK_DEPTH < STACK_MAX_DEPTH) {
 			pairing_model_generator(degree_sequence, g);
-		} else if (STACK_DEPTH == 16) {
+		} else if (STACK_DEPTH == STACK_MAX_DEPTH) {
 			std::cout << "\t[FUNC]pairing_model_generator: Generation failed. Stack Depth Exceeded.\n";
 		}
 	}

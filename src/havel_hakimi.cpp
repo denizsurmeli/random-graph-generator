@@ -10,14 +10,15 @@
 typedef boost::adjacency_list<boost::listS, boost::vecS, boost::undirectedS, boost::no_property> Graph;
 
 bool check_graphicality(std::deque<int> degree_sequence);
-
-/// @TODO:Need help for understanding this algorithm. It's a port of the NetworkX and NetworkIt, simplified
+bool check_cycles(Graph g);
+/// @TODO:Need help for understanding this algorithm. It's a port of the NetworkX and NetworkIt,
 /// even though it's very simplified. Need more research
 ///		Related links:
 ///			-https://github.com/networkit/networkit/blob/master/networkit/cpp/generators/HavelHakimiGenerator.cpp
 ///			-https://networkx.org/documentation/stable/reference/generated/networkx.generators.degree_seq.havel_hakimi_graph.html#networkx.generators.degree_seq.havel_hakimi_graph
 bool havel_hakimi_generator(const std::deque<int> &degree_sequence, Graph &g) {
 	std::cout << "\t[FUNC]havel_hakimi_generator\n";
+	g.clear();
 	if (!check_graphicality(degree_sequence)) {
 		return false;
 	}
@@ -61,10 +62,6 @@ bool havel_hakimi_generator(const std::deque<int> &degree_sequence, Graph &g) {
 			num_degs.at(k).pop_back();
 			boost::add_edge(target, source, g);
 			n--;
-			if (k > 1) {
-				modstubs.at(mslen) = std::pair<int, int>(k - 1, target);
-				mslen++;
-			}
 		}
 		for (int i = 0; i < mslen; i++) {
 			int stubval = modstubs.at(i).first;

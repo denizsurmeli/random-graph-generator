@@ -92,7 +92,7 @@ void batch_generate(std::vector<std::string> file_paths) {
 		*/
 	}
 	//export to csv.
-	benchmark_to_csv("../feeds/out/results.csv", benchmark_results);
+	benchmark_to_csv("../feeds/assets/results.csv", benchmark_results);
 	t_end = std::chrono::high_resolution_clock::now();
 
 	auto start = std::chrono::time_point_cast<std::chrono::microseconds>(t_start).time_since_epoch().count();
