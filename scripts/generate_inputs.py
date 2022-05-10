@@ -6,6 +6,8 @@ LOCATION_PREFIX = "../feeds/in/"
 GROUP_ID = "9"
 GENERATION_METHOD = "Python"
 
+sizes = [20, 1000, 2000]
+
 
 # Check a degree sequence is graphical or not
 def havel_hakimi(seq):
@@ -34,7 +36,6 @@ def write_to_textfile(length, sequence, identifier, valid=True):
         GROUP_ID, str(length),
         identifier_str,
         GENERATION_METHOD,
-        "VALID" if valid else "INVALID",
 
     ])
     file_name = LOCATION_PREFIX + file_name + ".txt"
@@ -44,18 +45,23 @@ def write_to_textfile(length, sequence, identifier, valid=True):
 
 
 ### Following functions are self-explanatory we believe
-def generate_valid_input(identifier, min_size=1, max_size=50):
-    size = random.randint(min_size, max_size)
+def generate_valid_input(size, identifier, min_size=1, max_size=50):
     degrees = [random.randint(0, size - 1) for i in range(size)]
     if (not havel_hakimi(degrees.copy())):
-        generate_valid_input(identifier, min_size, max_size)
+        generate_valid_input(size, identifier, min_size, max_size)
     else:
         degrees.sort(reverse=True)
         write_to_textfile(size, degrees, identifier)
 
 
-def generate_invalid_input(identifier, min_size=1, max_size=50):
-    size = random.randint(min_size, max_size)
+def generate_invalid_input(size, identifier, min_size=1, max_size=50):
     degrees = [random.randint(max_size, max_size * 2) for i in range(size)]
     degrees.sort(reverse=True)
     write_to_textfile(size, degrees, identifier, False)
+
+
+def generate_input(identifier, min_size=1, max_size=50):
+    size = random.randint(min_size, max_size)
+    degrees = [random.randint(0, size - 1) for i in range(size)]
+    degrees.sort(reverse=True)
+    write_to_textfile(size, degrees, identifier, True)
