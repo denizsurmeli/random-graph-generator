@@ -23,7 +23,10 @@ A collection of graph generators.
 
 For C++:
 
-- CMake and Boost Libraries. C++ Standard >=11 For Python:
+- CMake and Boost Libraries. C++ Standard >=11
+
+For Python:
+
 - Pandas and Matplotlib.
 
 ## Usage
