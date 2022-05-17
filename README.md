@@ -4,7 +4,8 @@ A collection of graph generators.
 
 ## TODO
 
-- [ ] Documentation
+- [ ] **URGENT**:Havel-Hakimi Generator(It might be broken).
+- [x] Documentation
 - [x] Code Commenting
 - [x] Sequential Algorithm Implementation
 - [x] Benchmark CSV Exporter
@@ -16,18 +17,18 @@ A collection of graph generators.
 - [x] Graphviz Generator(Built-in Boost Libraries)
 - [x] Input Generator
 - [x] Input Reader
-- [x] Output Writer(Partial Implemented, need better version)
+- [x] Output Writer
 - [x] CMake Config
 
 ## Dependencies:
 
 For C++:
 
-- CMake and Boost Libraries. C++ Standard >=11
+- `CMake` and `Boost` Libraries. C++ Standard >=11
 
 For Python:
 
-- Pandas and Matplotlib.
+- `Pandas`, `Numpy` and `Matplotlib`.
 
 ## Usage
 
@@ -41,10 +42,17 @@ python3 run.py n
 
 where n is the number of inputs you want it to generate. It automatically handles the rest.
 
-# On Windows, Manual Build
+# On Windows or Manual Build on any system
 
-Generate the inputs by using `scripts/auto_generate.py`. On the project folder, make a new directory called `build` and
-go into it. After that run the command:
+Generate the inputs by using `scripts/auto_generate.py`.
+
+```
+python3 scripts/auto_generate.py n
+```
+
+where `n` is the number of degree sequences to be generated.
+
+On the project folder, make a new directory called `build` and go into it. After that run the command:
 
 ```
 cmake ../. && cmake --build ."
