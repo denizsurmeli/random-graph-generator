@@ -6,8 +6,6 @@ LOCATION_PREFIX = "../feeds/in/"
 GROUP_ID = "9"
 GENERATION_METHOD = "Python"
 
-sizes = [20, 1000, 2000]
-
 
 # Check a degree sequence is graphical or not
 def havel_hakimi(seq):

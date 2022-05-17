@@ -52,7 +52,7 @@ bool pairing_model_generator(const std::deque<int> &degree_sequence, Graph &g) {
 	//will assure that we have exactly k stubs.
 	int half = len / 2;
 
-	//divide the stublist into two lists, match them uniformly !
+	//divide the stublist into two lists, match them uniformly.
 	std::vector<int> left = std::vector<int>(stub_list.begin(), stub_list.begin() + half);
 	std::vector<int> right = std::vector<int>(stub_list.begin() + half, stub_list.end());
 
@@ -66,7 +66,7 @@ bool pairing_model_generator(const std::deque<int> &degree_sequence, Graph &g) {
 	for (auto edge: edges) {
 		boost::add_edge(edge.first, edge.second, g);
 		//if there is cycle after the edge, restart the process.
-		/// @NOTICE: If stack depth control is not configured, stack overflow is likely to occur for large n's.
+		/// @NOTICE: If stack depth control is not enabled, stack overflow is likely to occur for large values of n.
 		/// 		 Thus, it's almost impossible to generate without the circuit breaker with pairing model generator.
 		if (check_cycles(g) && ++STACK_DEPTH < STACK_MAX_DEPTH) {
 			pairing_model_generator(degree_sequence, g);

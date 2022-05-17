@@ -8,6 +8,10 @@
 #include <numeric>
 #include <string>
 
+/// @NOTICE: This base includes multiple syscalls such as std::cout, thus the calls are expected to
+///			 compromise the benchmarks, at least in terms of IO operations.
+
+
 /// TYPEDEFS for better readability.
 typedef boost::adjacency_list<boost::listS, boost::vecS, boost::undirectedS, boost::no_property> Graph;
 typedef boost::graph_traits<Graph>::edge_iterator edge_iterator;

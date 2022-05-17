@@ -32,7 +32,7 @@ std::deque<std::string> split_string(std::string str, std::string delimiter) {
 //Splits the string by the given delimiter, puts the pieces into a vector.
 //Example:
 //str:"1 2 3 4 5 6"
-//result: std::vector<int>(1,2,3,4,5,6).
+//result: std::deque<int>(1,2,3,4,5,6).
 void split_string(std::string str, char delimiter, std::deque<int> &in) {
 	std::string temp;
 

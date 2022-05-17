@@ -18,7 +18,7 @@ bool check_cycles(Graph g);
 ///			-https://networkx.org/documentation/stable/reference/generated/networkx.generators.degree_seq.havel_hakimi_graph.html#networkx.generators.degree_seq.havel_hakimi_graph
 bool havel_hakimi_generator(const std::deque<int> &degree_sequence, Graph &g) {
 	std::cout << "\t[FUNC]havel_hakimi_generator\n";
-	g.clear();
+	// Check the graphicality of given degree sequence.
 	if (!check_graphicality(degree_sequence)) {
 		return false;
 	}
