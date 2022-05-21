@@ -120,7 +120,7 @@ bool sequential_model_generator(const std::deque<int> &ds, Graph &g) {
 		edge_list.push_back(std::pair<int, int>{min_index, j});
 		o_minus(degree_sequence, min_index, j);
 	}
-	//add edges to our our graph
+	//add edges to our graph
 	for (auto edge: edge_list) {
 		boost::add_edge(edge.first, edge.second, g);
 	}

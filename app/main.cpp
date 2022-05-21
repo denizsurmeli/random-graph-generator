@@ -11,7 +11,6 @@
 /// @NOTICE: This base includes multiple syscalls such as std::cout, thus the calls are expected to
 ///			 compromise the benchmarks, at least in terms of IO operations.
 
-
 /// TYPEDEFS for better readability.
 typedef boost::adjacency_list<boost::listS, boost::vecS, boost::undirectedS, boost::no_property> Graph;
 typedef boost::graph_traits<Graph>::edge_iterator edge_iterator;
@@ -24,6 +23,7 @@ void generate_graphviz_output(std::string, Graph);
 bool check_graphicality(std::deque<int> sequence);
 bool pairing_model_generator(const std::deque<int> &degree_sequence, Graph &g);
 bool havel_hakimi_generator(const std::deque<int> &, Graph &);
+bool havel_hakimi_generator_recursive(const std::deque<int> &degree_sequence, Graph &g);
 bool sequential_model_generator(const std::deque<int> &, Graph &g);
 std::deque<std::string> split_string(std::string, std::string);
 std::pair<int, double> benchmark(std::deque<int>, Graph &, std::function<bool(std::deque<int>, Graph &)>);
@@ -114,15 +114,15 @@ int main(int ac, char **argv) {
 			file_paths.push_back(file.path());
 		}
 		//give the filepaths to batch generator.
-		batch_generate(file_paths);
-		//		std::string file_path = "../feeds/in/9-3-3-Python-VALID.txt";
-		//		std::deque<int> degree_sequence = read_input(file_path);
-		//		if (sequential_model_generator(degree_sequence, g)) {
-		//			std::cout << "[PASS]" << std::endl;
-		//			std::pair<edge_iterator, edge_iterator> edges = boost::edges(g);
-		//			std::copy(edges.first, edges.second, std::ostream_iterator<Graph::edge_descriptor>{std::cout, "\n"});
-		//		};
-		//		std::cout << std::endl;
-		//		write_output("../feeds/out/test.txt", degree_sequence, g);
+		//batch_generate(file_paths);
+		std::string file_path = "../feeds/in/9-6-6-Python.txt";
+		std::deque<int> degree_sequence = read_input(file_path);
+		if (havel_hakimi_generator_recursive(degree_sequence, g)) {
+			std::cout << "[PASS]" << std::endl;
+			std::pair<edge_iterator, edge_iterator> edges = boost::edges(g);
+			std::copy(edges.first, edges.second, std::ostream_iterator<Graph::edge_descriptor>{std::cout, "\n"});
+		};
+		std::cout << std::endl;
+		write_output("../feeds/out/test.txt", degree_sequence, g);
 	}
 }

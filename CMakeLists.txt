@@ -14,6 +14,7 @@ if (Boost_FOUND)
             src/checkers.cpp
             src/ioutils.cpp
             src/benchmark.cpp
+            src/havel_hakimi_recursion.cpp
     )
 endif ()
 
