@@ -12,3 +12,27 @@ def export_graph(in_path, out_path):
     ax = df.plot.bar(x='input_size')
     ax.set_xticks(np.arange(0, len(df) + 1, len(df) / 10))
     plt.savefig(out_path)
+    df.to_csv(in_path)
+
+
+def export_pair_graphs(in_path):
+    OUT_PATH = "../feeds/assets/"
+    columns = ["HH", "PM", "SA"]
+    pairs = [
+        ["HH", "PM"],
+        ["HH", "SA"],
+        ["PM", "SA"]
+    ]
+    df = pd.read_csv(in_path)
+    df["input_size"] = pd.to_numeric(df["input_size"])
+    for column in columns:
+        df[column] = pd.to_numeric(df[column])
+    df = df.sort_values("input_size")
+    for pair in pairs:
+        ax = df.plot.bar(x='input_size', y=pair)
+        ax.set_xticks(np.arange(0, len(df) + 1, len(df) / 10))
+        plt.savefig(OUT_PATH + "".join(pair))
+    for single in columns:
+        ax = df.plot.bar(x='input_size', y=single)
+        ax.set_xticks(np.arange(0, len(df) + 1, len(df) / 10))
+        plt.savefig(OUT_PATH + "".join(single))

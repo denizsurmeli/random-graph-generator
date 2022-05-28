@@ -17,8 +17,10 @@ if __name__ == "__main__":
             else:
                 generate_valid_input(i, i)
         print("Done.")
-        print("Generation phase:")
-        os.system("pwd")
-        os.system("cd ../cmake-build-debug && cmake .. && cmake --build . && ./rgg \"../feeds/in/\" ")
+        if (sys.argv[2] == "--generate"):
+            print("Generation phase:")
+            os.system("pwd")
+            os.system("cd ../cmake-build-debug && cmake .. && cmake --build . && ./rgg \"../feeds/in/\" ")
         export_graph("../feeds/assets/results.csv", "../feeds/assets/plot.png")
+        export_pair_graphs("../feeds/assets/results.csv")
         print("Done.\nYou can find the resulting benchmarks and plots under feeds/assets/")
