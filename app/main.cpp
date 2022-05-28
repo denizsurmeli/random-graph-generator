@@ -114,15 +114,15 @@ int main(int ac, char **argv) {
 			file_paths.push_back(file.path());
 		}
 		//give the filepaths to batch generator.
-		//batch_generate(file_paths);
-		std::string file_path = "../feeds/in/9-6-6-Python.txt";
-		std::deque<int> degree_sequence = read_input(file_path);
-		if (havel_hakimi_generator_recursive(degree_sequence, g)) {
-			std::cout << "[PASS]" << std::endl;
-			std::pair<edge_iterator, edge_iterator> edges = boost::edges(g);
-			std::copy(edges.first, edges.second, std::ostream_iterator<Graph::edge_descriptor>{std::cout, "\n"});
-		};
-		std::cout << std::endl;
-		write_output("../feeds/out/test.txt", degree_sequence, g);
+		batch_generate(file_paths);
+		//		std::string file_path = "../feeds/in/9-6-6-Python.txt";
+		//		std::deque<int> degree_sequence = read_input(file_path);
+		//		if (havel_hakimi_generator_recursive(degree_sequence, g)) {
+		//			std::cout << "[PASS]" << std::endl;
+		//			std::pair<edge_iterator, edge_iterator> edges = boost::edges(g);
+		//			std::copy(edges.first, edges.second, std::ostream_iterator<Graph::edge_descriptor>{std::cout, "\n"});
+		//		};
+		//		std::cout << std::endl;
+		//		write_output("../feeds/out/test.txt", degree_sequence, g);
 	}
 }
