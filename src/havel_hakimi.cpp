@@ -5,16 +5,16 @@
 #include <algorithm>
 #include <boost/graph/adjacency_list.hpp>
 #include <iostream>
-#include <utility>
 
 typedef boost::adjacency_list<boost::listS, boost::vecS, boost::undirectedS, boost::no_property> Graph;
 
-bool check_graphicality(std::deque<int> degree_degree_sequence);
+bool check_graphicality(std::deque<int> degree_sequence);
 bool check_cycles(Graph g);
 bool is_all_zero(std::deque<int> degree_sequence);
 bool havel_hakimi_generator(const std::deque<int> &degree_sequence, Graph &g) {
-	static int STACK_DEPTH = 0;
-	if (STACK_DEPTH == 0) {
+	// it's a dummy variable for logging once after recursive calls.
+	static int stack_hit = 0;
+	if (stack_hit++ == 0) {
 		std::cout << "\t[FUNC]havel_hakimi_generator\n";
 	}
 	// If degree_sequence has no elements or every element in the degree_sequence is zero(given degree degree_sequence, the generated graph is disconnected),
@@ -42,6 +42,5 @@ bool havel_hakimi_generator(const std::deque<int> &degree_sequence, Graph &g) {
 		}
 	}
 	//Recursively try until failure or success.
-	STACK_DEPTH++;
 	return havel_hakimi_generator(mutable_degree_sequence, g);
 }

@@ -4,3 +4,4 @@ scripts/__pycache__/
 .DS_Store
 .devcontainer
 feeds/.DS_Store
+feeds/
