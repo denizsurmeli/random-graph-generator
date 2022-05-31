@@ -4,12 +4,11 @@ A collection of graph generators.
 
 ## TODO
 
-- [ ] **URGENT**:Havel-Hakimi Generator(It might be broken).
+- [x] **URGENT**:Havel-Hakimi Generator(It might be broken).
 - [x] Documentation
 - [x] Code Commenting
 - [x] Sequential Algorithm Implementation
 - [x] Benchmark CSV Exporter
-- [ ] Recursive version of the Havel-Hakimi Generator
 - [x] Better CLI Scripts
 - [x] Easy builder and runner scripts
 - [x] Pairing Model Generator
@@ -55,13 +54,14 @@ where `n` is the number of degree sequences to be generated.
 On the project folder, make a new directory called `build` and go into it. After that run the command:
 
 ```
-cmake ../. && cmake --build ."
+cmake ../. && cmake --build .
 ```
 
-Then execute the program on the `build` folder by running:
+Then execute the program on the `build` folder by feeding the inputs:
 
 ```
 ./rgg "./feeds/in"
 ```
 
-The project is fully `CLion` compatible.
+The project is fully `CLion` compatible. It's suggested for users to open the project with it in order to navigate and
+execute easier.

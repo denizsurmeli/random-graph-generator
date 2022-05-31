@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
+# Plotters for the data.
 def export_graph(in_path, out_path):
     df = pd.read_csv(in_path)
     columns = ["HH", "PM", "SA"]

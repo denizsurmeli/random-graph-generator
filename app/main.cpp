@@ -17,19 +17,24 @@ typedef boost::graph_traits<Graph>::edge_iterator edge_iterator;
 typedef std::function<bool(const std::deque<int> &, Graph &)> Generator;
 
 /// FUNCTIONS DEFINED IN OTHER FILES.
+/// IO and String Functions
 std::deque<int> read_input(std::string file_path);
 bool write_output(std::string, std::deque<int>, Graph);
 void generate_graphviz_output(std::string, Graph);
-bool check_graphicality(std::deque<int> sequence);
-bool pairing_model_generator(const std::deque<int> &degree_sequence, Graph &g);
-bool havel_hakimi_generator(const std::deque<int> &, Graph &);
-bool havel_hakimi_generator_recursive(const std::deque<int> &degree_sequence, Graph &g);
-bool sequential_model_generator(const std::deque<int> &, Graph &g);
 std::deque<std::string> split_string(std::string, std::string);
 std::pair<int, double> benchmark(std::deque<int>, Graph &, std::function<bool(std::deque<int>, Graph &)>);
 std::string postfix_indexer(int);
 bool benchmark_to_csv(std::string out_path, std::vector<std::vector<std::pair<int, double>>> results);
 
+/// Checkers
+bool check_graphicality(std::deque<int> sequence);
+
+/// Generators
+bool pairing_model_generator(const std::deque<int> &degree_sequence, Graph &g);
+bool havel_hakimi_generator(const std::deque<int> &, Graph &);
+bool sequential_model_generator(const std::deque<int> &, Graph &g);
+
+/// Helper func for putting out a triplet into STDOUT.
 void put_triple(std::vector<std::pair<int, double>> t) {
 	for (auto p: t) {
 		std::cout << "(" << p.first << "\t," << p.second << ")\t";
@@ -88,12 +93,6 @@ void batch_generate(std::vector<std::string> file_paths) {
 		}
 		//push the benchmark results.
 		benchmark_results.push_back(k_path_result);
-		/*
-		if (havel_hakimi_generator(degree_sequence, havel_hakimi_graph)) {
-			//std::pair<edge_iterator, edge_iterator> edges = boost::edges(g);
-			//std::copy(edges.first, edges.second, std::ostream_iterator<Graph::edge_descriptor>{std::cout, "\n"});
-		}
-		*/
 	}
 	//export to csv.
 	benchmark_to_csv("../feeds/assets/results.csv", benchmark_results);
@@ -115,14 +114,5 @@ int main(int ac, char **argv) {
 		}
 		//give the filepaths to batch generator.
 		batch_generate(file_paths);
-		//		std::string file_path = "../feeds/in/9-6-6-Python.txt";
-		//		std::deque<int> degree_sequence = read_input(file_path);
-		//		if (havel_hakimi_generator_recursive(degree_sequence, g)) {
-		//			std::cout << "[PASS]" << std::endl;
-		//			std::pair<edge_iterator, edge_iterator> edges = boost::edges(g);
-		//			std::copy(edges.first, edges.second, std::ostream_iterator<Graph::edge_descriptor>{std::cout, "\n"});
-		//		};
-		//		std::cout << std::endl;
-		//		write_output("../feeds/out/test.txt", degree_sequence, g);
 	}
 }

@@ -11,6 +11,7 @@ typedef boost::adjacency_list<boost::listS, boost::vecS, boost::undirectedS, boo
 bool check_graphicality(std::deque<int> degree_sequence);
 bool check_cycles(Graph g);
 bool is_all_zero(std::deque<int> degree_sequence);
+/// Generates a graph given the degree  sequence. Deterministic.
 bool havel_hakimi_generator(const std::deque<int> &degree_sequence, Graph &g) {
 	// it's a dummy variable for logging once after recursive calls.
 	static int stack_hit = 0;

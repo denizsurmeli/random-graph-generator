@@ -11,7 +11,7 @@
 
 typedef boost::adjacency_list<boost::listS, boost::vecS, boost::undirectedS, boost::no_property> Graph;
 
-/// Benchmarks the algorithms time given the sequence and a generator.
+/// Benchmarks an algorithm time given the sequence and a generator.
 std::pair<int, double> benchmark(std::deque<int> degree_sequence, Graph &g, std::function<bool(std::deque<int>, Graph &)> generator) {
 	// time points
 	std::chrono::time_point<std::chrono::high_resolution_clock> t_start, t_end;

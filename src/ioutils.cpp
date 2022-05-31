@@ -49,8 +49,8 @@ void split_string(std::string str, char delimiter, std::deque<int> &in) {
 		in.push_back(std::stoi(temp));
 }
 
-//Reads the file content, line by line.After parsing the file,
-//returns a vector that contains the degree sequence of the future graph.
+/// Reads the file content, line by line.After parsing the file,
+/// returns a deque that contains the degree sequence of the future graph.
 std::deque<int> read_input(std::string filepath) {
 	std::fstream file;
 	std::deque<int> degrees;
