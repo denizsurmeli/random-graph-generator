@@ -9,13 +9,12 @@ if __name__ == "__main__":
     if len(sys.argv) <= 1:
         print("Enter parameters for generating inputs.")
     else:
+        if (sys.argv[3] == "--cleanup"):
+            os.system("rm ../feeds/in/*.txt && rm ../feeds/out/*.txt ../feeds/out/*.dot ../feeds/assets/*")
         print("Generating:")
         print("\t", sys.argv[1], "sequences")
         for i in range(int(sys.argv[1])):
-            if (i % 5 == 0):
-                generate_invalid_input(i, i)
-            else:
-                generate_valid_input(i, i)
+            generate_valid_input(i, i)
         print("Done.")
         if (sys.argv[2] == "--generate"):
             print("Generation phase:")

@@ -62,18 +62,18 @@ bool pairing_model_generator(const std::deque<int> &degree_sequence, Graph &g) {
 		edges.push_back(std::pair<int, int>(left.at(i), right.at(i)));
 	}
 
-	//add psuedo-edges to to graph.
+	//add psuedo-edges to the graph.
 	for (auto edge: edges) {
 		boost::add_edge(edge.first, edge.second, g);
 		//if there is cycle after the edge, restart the process.
 		/// @NOTICE: If stack depth control is not enabled, stack overflow is likely to occur for large values of n.
 		/// 		 Thus, it's almost impossible to generate without the circuit breaker with pairing model generator.
-		if (check_cycles(g) && ++STACK_DEPTH < STACK_MAX_DEPTH) {
+		///			 We will denote them as inconclusive in our results.
+		if (check_graph(degree_sequence, g) && ++STACK_DEPTH < STACK_MAX_DEPTH) {
 			pairing_model_generator(degree_sequence, g);
 		} else if (STACK_DEPTH == STACK_MAX_DEPTH) {
-			std::cout << "\t[FUNC]pairing_model_generator: Generation failed. Stack Depth Exceeded.\n";
+			std::cout << "\t[FUNC]pairing_model_generator: Generation failed. Stack depth exceeded.\n";
 		}
 	}
-
 	return true;
 }

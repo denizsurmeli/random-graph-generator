@@ -49,7 +49,7 @@ bool check_graphicality(std::deque<int> sequence) {
 	return check_graphicality(std::move(sequence));
 }
 
-//Check that sequence and the generated graph's degree sequence match.
+/// Check that sequence and the generated graph's degree sequence match.
 bool check_sequence(const std::deque<int> &degree_sequence, Graph g) {
 	std::deque<int> g_ds = std::deque<int>(degree_sequence.size(), 0);
 	//iterate through every edge, increase the values in the sequence.
@@ -74,7 +74,7 @@ bool check_cycles(Graph g) {
 
 /// Checks if a graph has multiple edges for some vertex.
 /// A simple graph can have at most N*(N-1)/2 vertices, if there are more
-/// By the pigeon principle there must be a vertex connected more than once to another vertex.
+/// By the pigeon hole principle there must be a vertex connected more than once to another vertex.
 bool check_multiple_edges(Graph g) {
 	//leverage the pigeon_hole principle.
 	std::pair<Graph::vertex_iterator, Graph::vertex_iterator> vi = boost::vertices(g);

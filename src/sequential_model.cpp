@@ -11,7 +11,7 @@
 typedef boost::adjacency_list<boost::listS, boost::vecS, boost::undirectedS, boost::no_property> Graph;
 
 bool check_graphicality(std::deque<int> sequence);
-
+bool check_graph(std::deque<int> degree_sequence, Graph g);
 // Reduces the values of the elements of the degree sequence at indexes i and j by 1.
 void o_minus(std::deque<int> &degree_sequence, int i, int j) {
 	degree_sequence.at(i)--;
@@ -72,6 +72,8 @@ std::deque<int> erase_indices(std::deque<int> &list, std::vector<int> indices) {
 
 /// Generates random graphs using the sequential model
 bool sequential_model_generator(const std::deque<int> &ds, Graph &g) {
+	static int stack_depth = 0;
+	constexpr int STACK_LIMIT = 4;
 	std::cout << "\t[FUNC]sequential_model_generator\n";
 	// copying the sequence since we will modify a bit.
 	std::deque<int> degree_sequence = ds;
@@ -81,13 +83,14 @@ bool sequential_model_generator(const std::deque<int> &ds, Graph &g) {
 	if (!check_graphicality(degree_sequence)) {
 		return false;
 	}
+	//clear the graph so that the previous iteration do not interfere with the current one.
+	g.clear();
 
 	//store the edges first in a vector of pairs
 	std::vector<std::pair<int, int>> edge_list;
 	while (true) {
 		//find the minimum non-zero degree vertex index in the sequence
 		int min_index = std::accumulate(degree_sequence.begin(), degree_sequence.end(), 0) > 0 ? find_min_index(degree_sequence) : 0;
-		// @TODO:Cleanup this mess.
 		//observe that on condition execution, we are done with the algorithm.
 		if (min_index == 0) {
 			break;
@@ -124,5 +127,13 @@ bool sequential_model_generator(const std::deque<int> &ds, Graph &g) {
 	for (auto edge: edge_list) {
 		boost::add_edge(edge.first, edge.second, g);
 	}
+	//	if (!check_graph(degree_sequence, g)) {
+	//		if (++stack_depth != STACK_LIMIT) {
+	//			sequential_model_generator(ds, g);
+	//		}else{
+	//			std::cout << "[FUNC] Sequential algorithm:Failed stack depth." << std::endl;
+	//			return false;
+	//		}
+	//	}
 	return true;
 }

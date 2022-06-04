@@ -36,7 +36,7 @@ For Python:
 On the project folder, change your directory to scripts.
 
 ```
-python3 run.py n
+python3 run.py n --generate --cleanup
 ```
 
 where n is the number of inputs you want it to generate. It automatically handles the rest.
@@ -46,7 +46,7 @@ where n is the number of inputs you want it to generate. It automatically handle
 Generate the inputs by using `scripts/auto_generate.py`.
 
 ```
-python3 scripts/auto_generate.py n
+python3 scripts/auto_generate.py n 
 ```
 
 where `n` is the number of degree sequences to be generated.
