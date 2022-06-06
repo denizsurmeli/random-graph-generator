@@ -31,7 +31,7 @@ std::vector<int> to_stub_list(std::deque<int> degree_sequence) {
 bool pairing_model_generator(const std::deque<int> &degree_sequence, Graph &g) {
 	// Stack depth constraint
 	static int STACK_DEPTH = 0;
-	constexpr int STACK_MAX_DEPTH = 16;
+	constexpr int STACK_MAX_DEPTH = 24;
 	if (STACK_DEPTH == 0) {
 		std::cout << "\t[FUNC]pairing_model_generator\n";
 	}
@@ -73,6 +73,7 @@ bool pairing_model_generator(const std::deque<int> &degree_sequence, Graph &g) {
 			pairing_model_generator(degree_sequence, g);
 		} else if (STACK_DEPTH == STACK_MAX_DEPTH) {
 			std::cout << "\t[FUNC]pairing_model_generator: Generation failed. Stack depth exceeded.\n";
+			return false;
 		}
 	}
 	return true;

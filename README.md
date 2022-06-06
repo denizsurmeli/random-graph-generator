@@ -35,10 +35,10 @@ In this setup, every phase executed manually and no plots will be generated.
 Generate the inputs by using `scripts/auto_generate.py`.
 
 ```
-python3 scripts/auto_generate.py n 
+python3 scripts/auto_generate.py n k 
 ```
 
-where `n` is the number of degree sequences to be generated.
+where `n` and `k` are the numbers of valid degree sequences and invalid degree sequences respectively,to be generated.
 
 On the project folder, make a new directory called `build` and go into it. After that run the command:
 
@@ -60,7 +60,7 @@ execute easier.
 - [x] Havel-Hakimi Generator.
 - [x] Documentation
 - [x] Code Commenting
-- [x] ***URGENT*** Sequential Algorithm Implementation
+- [x] Sequential Algorithm Implementation
 - [x] Benchmark CSV Exporter
 - [x] Better CLI Scripts
 - [x] Easy builder and runner scripts

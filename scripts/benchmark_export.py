@@ -13,6 +13,8 @@ def export_graph(in_path, out_path):
     ax = df.plot.bar(x='input_size')
     ax.set_xticks(np.arange(0, len(df) + 1, len(df) / 10))
     plt.savefig(out_path)
+    plt.xlabel("input size")
+    plt.ylabel("ms")
     df.to_csv(in_path)
 
 
@@ -32,8 +34,12 @@ def export_pair_graphs(in_path):
     for pair in pairs:
         ax = df.plot.bar(x='input_size', y=pair)
         ax.set_xticks(np.arange(0, len(df) + 1, len(df) / 10))
+        plt.xlabel("input size")
+        plt.ylabel("ms")
         plt.savefig(OUT_PATH + "".join(pair))
     for single in columns:
         ax = df.plot.bar(x='input_size', y=single)
         ax.set_xticks(np.arange(0, len(df) + 1, len(df) / 10))
+        plt.xlabel("input size")
+        plt.ylabel("ms")
         plt.savefig(OUT_PATH + "".join(single))
