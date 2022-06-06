@@ -60,7 +60,7 @@ execute easier.
 - [x] Havel-Hakimi Generator.
 - [x] Documentation
 - [x] Code Commenting
-- [ ] ***URGENT*** Sequential Algorithm Implementation
+- [x] ***URGENT*** Sequential Algorithm Implementation
 - [x] Benchmark CSV Exporter
 - [x] Better CLI Scripts
 - [x] Easy builder and runner scripts

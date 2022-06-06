@@ -13,14 +13,14 @@ typedef boost::adjacency_list<boost::listS, boost::vecS, boost::undirectedS, boo
 bool check_graphicality(std::deque<int> sequence);
 bool check_graph(std::deque<int> degree_sequence, Graph g);
 
-// Reduces the values of the elements of the degree sequence at indexes i and j by 1.
+/// Reduces the values of the elements of the degree sequence at indexes i and j by 1.
 void o_minus(std::deque<int> &degree_sequence, int i, int j) {
 	degree_sequence.at(i)--;
 	degree_sequence.at(j)--;
 }
 
-//Increments the elements value at indexes i and j of the degree sequence by 1.
-void o_plus(std::deque<int> &degree_sequence, int i, int j) {
+/// Increments the elements value at indexes i and j of the degree sequence by 1.
+__attribute__((unused)) void o_plus(std::deque<int> &degree_sequence, int i, int j) {
 	degree_sequence.at(i)++;
 	degree_sequence.at(j)++;
 }
@@ -35,7 +35,7 @@ int find_min_index(std::deque<int> degree_sequence) {
 	return 0;
 }
 /// given a deque, uniformly distributes the elements indexes by their value into another deque and selects randomly from it.
-int linear_distribution_and_pickup(std::deque<int> degree_sequence) {
+__attribute__((unused)) int linear_distribution_and_pickup(std::deque<int> degree_sequence) {
 	std::deque<int> linear_dist;
 	//raffle into another deque, distribute them by their values.
 	for (int i = 0; i < degree_sequence.size(); i++) {
@@ -52,7 +52,7 @@ int linear_distribution_and_pickup(std::deque<int> degree_sequence) {
 }
 
 /// removes the elements that are not in the candidate list.
-std::deque<int> erase_indices(std::deque<int> &list, std::vector<int> indices) {
+__attribute__((unused)) std::deque<int> erase_indices(std::deque<int> &list, std::vector<int> indices) {
 	if (indices.empty()) {
 		return std::deque<int>(0);
 	}
@@ -68,12 +68,13 @@ std::deque<int> erase_indices(std::deque<int> &list, std::vector<int> indices) {
 	return reduced_form;
 }
 
-int pick_candidate(const std::deque<int>& degree_sequence,const std::vector<int>& candidate_list){
+/// Picks a candidate from the candidate list.
+int pick_candidate(const std::deque<int> &degree_sequence, const std::vector<int> &candidate_list) {
 	std::deque<int> linear_dist;
 
-	for(int i = 0 ; i < degree_sequence.size() ; i++){
-		if(std::count(candidate_list.begin(),candidate_list.end(),i) != 0){
-			for(int j  = 0; j < degree_sequence.at(i);j++){
+	for (int i = 0; i < degree_sequence.size(); i++) {
+		if (std::count(candidate_list.begin(), candidate_list.end(), i) != 0) {
+			for (int j = 0; j < degree_sequence.at(i); j++) {
 				linear_dist.push_back(i);
 			}
 		}
@@ -84,10 +85,7 @@ int pick_candidate(const std::deque<int>& degree_sequence,const std::vector<int>
 	std::uniform_int_distribution<int> uni_dist(0, linear_dist.size() - 1);
 	int random_index = uni_dist(random_generator);
 	return linear_dist.at(random_index);
-
 }
-
-
 
 /// Generates random graphs using the sequential model
 bool sequential_model_generator(const std::deque<int> &ds, Graph &g) {
@@ -130,13 +128,11 @@ bool sequential_model_generator(const std::deque<int> &ds, Graph &g) {
 			}
 		}
 		//if no candidate, we are done.
-		if(candidate_list.empty()){
+		if (candidate_list.empty()) {
 			break;
 		}
 		//selection of one of the candidates.
-		std::deque<int> exclude_selection_sequence = erase_indices(degree_sequence, candidate_list);
-		//remove the non-candidate vertices from the degree_sequence
-		int j = pick_candidate(degree_sequence,candidate_list);
+		int j = pick_candidate(degree_sequence, candidate_list);
 		//after selection, generate a new edge.
 		edge_list.push_back(std::pair<int, int>{min_index, j});
 		o_minus(degree_sequence, min_index, j);
@@ -145,6 +141,7 @@ bool sequential_model_generator(const std::deque<int> &ds, Graph &g) {
 	for (auto edge: edge_list) {
 		boost::add_edge(edge.first, edge.second, g);
 	}
+	///  @__attribute__((deprecated))
 	//	if (!check_graph(degree_sequence, g)) {
 	//		if (++stack_depth != STACK_LIMIT) {
 	//			sequential_model_generator(ds, g);
