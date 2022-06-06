@@ -23,8 +23,6 @@ bool havel_hakimi_generator(const std::deque<int> &degree_sequence, Graph &g) {
 	if (stack_depth++ == 0) {
 		std::cout << "\t[FUNC]havel_hakimi_generator\n";
 	}
-	//clean the graph for previous recursive try.
-	g.clear();
 	// If degree_sequence has no elements or every element in the degree_sequence is zero(given degree degree_sequence, the generated graph is disconnected),
 	// it's graphical.
 	std::deque<int> mutable_degree_sequence = degree_sequence;

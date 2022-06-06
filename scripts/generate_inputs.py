@@ -56,10 +56,3 @@ def generate_invalid_input(size, identifier, min_size=1, max_size=50):
     degrees = [random.randint(max_size, max_size * 2) for i in range(size)]
     degrees.sort(reverse=True)
     write_to_textfile(size, degrees, identifier, False)
-
-
-def generate_input(identifier, min_size=1, max_size=50):
-    size = random.randint(min_size, max_size)
-    degrees = [random.randint(0, size - 1) for i in range(size)]
-    degrees.sort(reverse=True)
-    write_to_textfile(size, degrees, identifier, True)
