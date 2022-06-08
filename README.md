@@ -13,6 +13,10 @@ For `Python`:
 - `Pandas`, `Numpy` and `Matplotlib`.
 - `Python >= 3.8.0`
 
+For `Docker`:
+
+- You need `Docker`.
+
 # Usage
 
 ### Single Phase Execution
@@ -54,6 +58,26 @@ Then execute the program on the `build` folder by feeding the inputs:
 
 The project is fully `CLion` compatible. It's suggested for users to open the project with it in order to navigate and
 execute easier.
+
+## Docker(Easiest Way)
+
+There is a `dockerfile` for containerized version of the program with all necessary dependencies.
+
+Change your directory to the project folder and run
+
+```asm
+docker build . --build-arg valid_inputs=N --build-arg invalid_inputs=K -t rgg:latest
+```
+
+Where `N` is the number of valid inputs and `K` is the number of invalid inputs. After you build the image, start the
+image and attach to it by running
+
+```asm
+docker run -it rgg:latest
+```
+
+After that you will be greeted in a containerized environment. You can find the inputs and outputs under `./feeds/in`
+and`./feeds/out` respectively.
 
 ## TODO
 

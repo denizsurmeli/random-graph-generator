@@ -13,7 +13,7 @@ if __name__ == "__main__":
             os.system("rm ../feeds/in/*.txt && rm ../feeds/out/*.txt ../feeds/out/*.dot ../feeds/assets/*")
         print("Generating:")
         print("\t", sys.argv[1], "sequences")
-        for i in range(int(sys.argv[1])):
+        for i in range(0, int(sys.argv[1]), 5):
             generate_valid_input(i, i)
         print("Done.")
         if (sys.argv[2] == "--generate"):

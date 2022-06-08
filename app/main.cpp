@@ -31,8 +31,8 @@ bool check_graphicality(std::deque<int> sequence);
 
 /// Generators
 bool pairing_model_generator(const std::deque<int> &degree_sequence, Graph &g);
-bool havel_hakimi_generator(const std::deque<int> &, Graph &);
-bool sequential_model_generator(const std::deque<int> &, Graph &g);
+bool havel_hakimi_generator(const std::deque<int> &degree_sequence, Graph &g);
+bool sequential_model_generator(const std::deque<int> &degree_sequence, Graph &g);
 
 /// Helper func for putting out a triplet into STDOUT.
 void put_triple(std::vector<std::pair<int, double>> t) {
@@ -109,7 +109,7 @@ int main(int ac, char **argv) {
 		std::string in_folder_path = std::string(argv[1]);
 		std::vector<std::string> file_paths{};
 		//scrape every file in the filepath
-		for (const auto &file: std::__fs::filesystem::directory_iterator(std::string(argv[1]))) {
+		for (const auto &file: std::filesystem::directory_iterator(std::string(argv[1]))) {
 			file_paths.push_back(file.path());
 		}
 		//give the filepaths to batch generator.

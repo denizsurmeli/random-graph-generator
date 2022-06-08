@@ -1,5 +1,4 @@
 from generate_inputs import *
-from benchmark_export import *
 
 print("Generating:")
 print("\t", sys.argv[1], "valid sequences")

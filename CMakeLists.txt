@@ -1,7 +1,9 @@
 cmake_minimum_required(VERSION 3.20)
 
 project(rgg)
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_COMPILER "g++")
+set(CMAKE_CXX_STANDARD 17)
+
 find_package(Boost 1.7 REQUIRED COMPONENTS)
 if (Boost_FOUND)
     include_directories(${Boost_INCLUDE_DIRS})

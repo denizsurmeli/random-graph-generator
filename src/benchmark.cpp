@@ -21,11 +21,11 @@ std::pair<int, double> benchmark(std::deque<int> degree_sequence, Graph &g, std:
 	t_start = std::chrono::high_resolution_clock::now();
 	// some visualization
 	std::cout << "Generating graph with degree sequence size of:" << degree_sequence.size() << std::endl;
-	std::cout << "\tSequence:[";
-
-	for (auto degree: degree_sequence) {
-		std::cout << degree << ",";
-	}
+	//	std::cout << "\tSequence:[";
+	//
+	//	for (auto degree: degree_sequence) {
+	//		std::cout << degree << ",";
+	//	}
 	std::cout << "]\n";
 	// if generator fails, panic
 	if (!generator(degree_sequence, g)) {

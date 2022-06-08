@@ -24,7 +24,7 @@ __attribute__((unused)) void o_plus(std::deque<int> &degree_sequence, int i, int
 	degree_sequence.at(i)++;
 	degree_sequence.at(j)++;
 }
-// finds the non-zero minimum value elements index.
+/// Finds the non-zero minimum value elements index.
 /// NOTICE: The list is already sorted in a decreasing order. Traversing from back to front to find the first non-zero element is sufficient.
 int find_min_index(std::deque<int> degree_sequence) {
 	for (int i = degree_sequence.size() - 1; i > 0; i--) {

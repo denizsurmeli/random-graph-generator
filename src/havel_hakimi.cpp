@@ -43,6 +43,7 @@ bool havel_hakimi_generator(const std::deque<int> &degree_sequence, Graph &g) {
 			mutable_degree_sequence.at(i)--;
 			// found a connectable pair, add the edge to the graph
 			boost::add_edge(highest_degree, i, g);
+			/// This is a stack limitor for recursive calls. No need at the moment.
 			//			if (!check_graph(degree_sequence, g)) {
 			//				if (++stack_depth == STACK_LIMIT) {
 			//					return false;
