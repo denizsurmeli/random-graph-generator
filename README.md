@@ -1,6 +1,6 @@
 # Random Graph Generators
 
-A collection of graph generators.
+A collection of graph generators. The research paper can be found [here](/assets/IE456_Project.pdf).
 
 ## Dependencies:
 
